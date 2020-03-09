@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 public class MainCorreios {
 	
 	WebDriver driver;
+	Select selectUf;
 	@Before
 	public void setupThePage() {
 		System.setProperty("webdriver.chrome.driver",
@@ -22,16 +23,24 @@ public class MainCorreios {
 		
 	}
 
+	@Test
+	public void preencheUF() {
+		// ESCOLHE VALOR UF
+				selectUf = new Select(driver.findElement(By.name("UF")));
+				
+				assertNotNull(selectUf);
+				selectUf.selectByVisibleText("RS");
+				
+				
+		
+	}
 	
 	@Test
 	public void preencheFormCorreiosBuscaLogradouroPorBairro() {
 					
 		driver.get("http://www.buscacep.correios.com.br/sistemas/buscacep/buscaLogBairro.cfm");
 		
-		// ESCOLHE VALOR UF
-		Select selectUf = new Select(driver.findElement(By.name("UF")));
-
-		selectUf.selectByVisibleText("RS");
+	
 		
 		WebElement localidade = driver.findElement(By.name("Localidade"));
 		localidade.sendKeys("Porto Alegre");
